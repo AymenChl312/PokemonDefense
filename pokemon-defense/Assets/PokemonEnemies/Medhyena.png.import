@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://grxyxn0fdxng"
-path="res://.godot/imported/Carapuce.png-5d6932447bf667c3e8c5fa29cab80841.ctex"
+uid="uid://y1p53kty7x4v"
+path="res://.godot/imported/Medhyena.png-0ca7c996b4149416cb353b4e92fedb7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Carapuce.png"
-dest_files=["res://.godot/imported/Carapuce.png-5d6932447bf667c3e8c5fa29cab80841.ctex"]
+source_file="res://Assets/PokemonEnemies/Medhyena.png"
+dest_files=["res://.godot/imported/Medhyena.png-0ca7c996b4149416cb353b4e92fedb7d.ctex"]
 
 [params]
 

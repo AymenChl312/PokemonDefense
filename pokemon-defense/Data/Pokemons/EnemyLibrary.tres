@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyLibrary" format=3 uid="uid://17ulfxhh3pw4"]
+
+[ext_resource type="Script" uid="uid://bqitnlnj80oku" path="res://Scripts/PokemonEnemies/EnemyData.gd" id="1_jhrrc"]
+[ext_resource type="Texture2D" uid="uid://y1p53kty7x4v" path="res://Assets/PokemonEnemies/Medhyena.png" id="2_4ptep"]
+[ext_resource type="Script" uid="uid://b4dlks34qqbix" path="res://Scripts/PokemonEnemies/EnemyLibrary.gd" id="2_jdh4i"]
+
+[sub_resource type="Resource" id="Resource_7evoj"]
+script = ExtResource("1_jhrrc")
+pkmn_id = 100
+sprite = ExtResource("2_4ptep")
+metadata/_custom_type_script = "uid://bqitnlnj80oku"
+
+[resource]
+script = ExtResource("2_jdh4i")
+database = Dictionary[int, ExtResource("1_jhrrc")]({
+100: SubResource("Resource_7evoj")
+})
+metadata/_custom_type_script = "uid://b4dlks34qqbix"

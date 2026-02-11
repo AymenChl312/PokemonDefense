@@ -13,7 +13,6 @@ config_version=5
 config/name="Pokemon Defense"
 run/main_scene="uid://jxtbuyet6s2k"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://Assets/icon.svg"
 
 [display]
 

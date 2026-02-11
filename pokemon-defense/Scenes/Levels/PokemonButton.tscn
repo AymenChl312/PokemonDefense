@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c6bogtdthbj7c"]
+
+[ext_resource type="Script" uid="uid://crttbyoufa6ud" path="res://Scripts/Levels/PokemonButton.gd" id="1_w6fiq"]
+
+[node name="PokemonButton" type="Button" unique_id=359146361]
+script = ExtResource("1_w6fiq")

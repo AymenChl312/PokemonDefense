@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7e0yyl1r0jjf"
-path="res://.godot/imported/Tile_Grass.png-3446557d98d39211d0c81589829d4aa2.ctex"
+uid="uid://grxyxn0fdxng"
+path="res://.godot/imported/Carapuce.png-7b62f85c588c1fedb0e63c3895b656b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tile_Grass.png"
-dest_files=["res://.godot/imported/Tile_Grass.png-3446557d98d39211d0c81589829d4aa2.ctex"]
+source_file="res://Assets/PokemonsAllies/Carapuce.png"
+dest_files=["res://.godot/imported/Carapuce.png-7b62f85c588c1fedb0e63c3895b656b4.ctex"]
 
 [params]
 

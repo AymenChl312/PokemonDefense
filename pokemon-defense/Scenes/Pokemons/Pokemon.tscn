@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ql7nohg6m1cq"]
+
+[ext_resource type="Script" uid="uid://phf1lyxtu540" path="res://Scripts/PokemonAllies/Pokemon.gd" id="1_0kaq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kaq2"]
+
+[node name="Pokemon" type="StaticBody2D" unique_id=1958101685]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_0kaq2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1836862195]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1488720000]
+shape = SubResource("RectangleShape2D_0kaq2")
+
+[node name="LineDetector" type="RayCast2D" parent="." unique_id=1526371137]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1893724038]
+one_shot = true

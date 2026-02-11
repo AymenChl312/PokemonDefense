@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://o0uchve3hlmv"]
 
-[ext_resource type="Texture2D" uid="uid://y1p53kty7x4v" path="res://Assets/Medhyena.png" id="1_27ead"]
-[ext_resource type="Script" uid="uid://d2baj0usnvqly" path="res://Scripts/EnemyPokemon.gd" id="1_qcbv3"]
+[ext_resource type="Texture2D" uid="uid://y1p53kty7x4v" path="res://Assets/PokemonEnemies/Medhyena.png" id="1_27ead"]
+[ext_resource type="Script" uid="uid://d2baj0usnvqly" path="res://Scripts/PokemonEnemies/EnemyPokemon.gd" id="1_qcbv3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qcbv3"]
 size = Vector2(44, 40)
