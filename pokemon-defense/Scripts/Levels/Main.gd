@@ -22,11 +22,12 @@ func _ready():
 	$PokemonPreview.visible = false
 	
 	if current_level:
-		$SpawnTimer.wait_time = current_level.spawn_interval
+		$SpawnTimer.wait_time = current_level.level_start_time
 		$SpawnTimer.timeout.connect(_on_spawn_timer_timeout)
 		$SpawnTimer.start()
 	
 	generate_buttons()
+
 
 func _process(_delta):
 	var mouse_pos = get_global_mouse_position()
@@ -59,11 +60,20 @@ func is_valid_cell(map_pos):
 	return source_id != -1 and is_free
 
 func _input(event):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if selected_id != PkmnID.Name.NONE:
-				place_pokemon(get_global_mouse_position())
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed:
+				if selected_id != PkmnID.Name.NONE:
+					place_pokemon(get_global_mouse_position())
+			else:
+				if selected_id != PkmnID.Name.NONE:
+					var mouse_pos = get_global_mouse_position()
+					var map_pos = $Grid.local_to_map($Grid.to_local(mouse_pos))
+					
+					if is_valid_cell(map_pos):
+						place_pokemon(mouse_pos)
+					
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			cancel_selection()
 
 func place_pokemon(mouse_pos):
@@ -79,6 +89,9 @@ func place_pokemon(mouse_pos):
 		add_child(new_pokemon)
 			
 		occupied_cells[map_pos] = new_pokemon
+		
+		new_pokemon.tree_exiting.connect(func(): occupied_cells.erase(map_pos))
+		
 		
 		energy -= master_library.database[selected_id].cost
 			
@@ -99,6 +112,9 @@ func _on_spawn_timer_timeout():
 		var enemy_id = current_level.possible_enemies[random_index]
 		
 		spawn_enemy(random_row, enemy_id)
+		
+		if $SpawnTimer.wait_time != current_level.spawn_interval:
+			$SpawnTimer.wait_time = current_level.spawn_interval
 
 func spawn_enemy(row_index, enemy_id):
 	var new_enemy = enemy_scene.instantiate()
@@ -117,7 +133,7 @@ func generate_buttons():
 		var data = master_library.database[id]
 		
 		btn.setup(data)
-		btn.pressed.connect(func(): _on_pokemon_selected(id))
+		btn.button_down.connect(func(): _on_pokemon_selected(id))
 		
 		$UI/ButtonContainer.add_child(btn)
 

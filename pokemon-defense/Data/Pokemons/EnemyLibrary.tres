@@ -1,18 +1,32 @@
 [gd_resource type="Resource" script_class="EnemyLibrary" format=3 uid="uid://17ulfxhh3pw4"]
 
-[ext_resource type="Script" uid="uid://bqitnlnj80oku" path="res://Scripts/PokemonEnemies/EnemyData.gd" id="1_jhrrc"]
-[ext_resource type="Texture2D" uid="uid://y1p53kty7x4v" path="res://Assets/PokemonEnemies/Medhyena.png" id="2_4ptep"]
+[ext_resource type="Script" uid="uid://bqitnlnj80oku" path="res://Scripts/PokemonEnemies/EnemyData.gd" id="1_h25r7"]
+[ext_resource type="Texture2D" uid="uid://y1p53kty7x4v" path="res://Assets/PokemonEnemies/Medhyena.png" id="2_25eft"]
 [ext_resource type="Script" uid="uid://b4dlks34qqbix" path="res://Scripts/PokemonEnemies/EnemyLibrary.gd" id="2_jdh4i"]
+[ext_resource type="Texture2D" uid="uid://bpvct3erd7sc" path="res://Assets/PokemonEnemies/Rattata.png" id="3_2rls1"]
 
-[sub_resource type="Resource" id="Resource_7evoj"]
-script = ExtResource("1_jhrrc")
+[sub_resource type="Resource" id="Resource_2rls1"]
+script = ExtResource("1_h25r7")
 pkmn_id = 100
-sprite = ExtResource("2_4ptep")
+sprite = ExtResource("2_25eft")
+health = 80
+speed = 30.0
+attack_damage = 20.0
+metadata/_custom_type_script = "uid://bqitnlnj80oku"
+
+[sub_resource type="Resource" id="Resource_1t5kf"]
+script = ExtResource("1_h25r7")
+pkmn_id = 102
+sprite = ExtResource("3_2rls1")
+health = 40
+speed = 70.0
+attack_damage = 10.0
 metadata/_custom_type_script = "uid://bqitnlnj80oku"
 
 [resource]
 script = ExtResource("2_jdh4i")
-database = Dictionary[int, ExtResource("1_jhrrc")]({
-100: SubResource("Resource_7evoj")
+database = Dictionary[int, ExtResource("1_h25r7")]({
+100: SubResource("Resource_2rls1"),
+102: SubResource("Resource_1t5kf")
 })
 metadata/_custom_type_script = "uid://b4dlks34qqbix"

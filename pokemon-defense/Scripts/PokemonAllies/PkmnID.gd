@@ -8,6 +8,9 @@ enum Name {
 	TORTANK = 3,
 	TOURNEGRIN = 4,
 	HELIATRONC = 5,
+	RACAILLOU = 6,
+	GRAVALANCH = 7,
+	GROLEM = 8,
 	
 	# Ennemis (100+)
 	MEDHYENA = 100,

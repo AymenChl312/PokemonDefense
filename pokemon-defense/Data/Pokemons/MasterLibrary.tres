@@ -3,31 +3,47 @@
 [ext_resource type="Script" uid="uid://ddpdvw18frqac" path="res://Scripts/PokemonAllies/PkmnData.gd" id="1_unobo"]
 [ext_resource type="Texture2D" uid="uid://4216u3w7v7wh" path="res://Assets/Projectiles/Bubble.png" id="2_pnkj7"]
 [ext_resource type="Texture2D" uid="uid://grxyxn0fdxng" path="res://Assets/PokemonsAllies/Carapuce.png" id="3_ters5"]
-[ext_resource type="Texture2D" uid="uid://y1p53kty7x4v" path="res://Assets/PokemonEnemies/Medhyena.png" id="4_h0n8x"]
+[ext_resource type="Texture2D" uid="uid://c3wffcwqeu3d7" path="res://Assets/Projectiles/energy.png" id="4_pnkj7"]
+[ext_resource type="Texture2D" uid="uid://bxqg0jjqcont2" path="res://Assets/PokemonsAllies/Tournegrain.png" id="5_ters5"]
 [ext_resource type="Script" uid="uid://i5xk7vvthaty" path="res://Scripts/PokemonAllies/PkmnLibrary.gd" id="5_wkx57"]
+[ext_resource type="Texture2D" uid="uid://bmfpd46sgbj4k" path="res://Assets/PokemonsAllies/Racaillou.png" id="6_ters5"]
 
-[sub_resource type="Resource" id="Resource_2yx8b"]
+[sub_resource type="Resource" id="Resource_g4acg"]
 script = ExtResource("1_unobo")
 pkmn_name = 1
 sprite = ExtResource("3_ters5")
 pkmn_name_string = "Carapuce"
-damage = 25
+cost = 100
 proj_sprite = ExtResource("2_pnkj7")
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
-[sub_resource type="Resource" id="Resource_wj23r"]
+[sub_resource type="Resource" id="Resource_pnkj7"]
 script = ExtResource("1_unobo")
+pkmn_type = 1
 pkmn_name = 4
-sprite = ExtResource("4_h0n8x")
+sprite = ExtResource("5_ters5")
 pkmn_name_string = "Tournegrin"
-range_tiles = 18
-proj_sprite = ExtResource("2_pnkj7")
+primary_value = 25.0
+action_rate = 5.0
+proj_sprite = ExtResource("4_pnkj7")
+metadata/_custom_type_script = "uid://ddpdvw18frqac"
+
+[sub_resource type="Resource" id="Resource_ters5"]
+script = ExtResource("1_unobo")
+pkmn_type = 2
+pkmn_name = 6
+sprite = ExtResource("6_ters5")
+pkmn_name_string = "Racaillou"
+health = 250
+range_tiles = 0
+cost = 200
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
 [resource]
 script = ExtResource("5_wkx57")
 database = Dictionary[int, ExtResource("1_unobo")]({
-1: SubResource("Resource_2yx8b"),
-4: SubResource("Resource_wj23r")
+1: SubResource("Resource_g4acg"),
+4: SubResource("Resource_pnkj7"),
+6: SubResource("Resource_ters5")
 })
 metadata/_custom_type_script = "uid://i5xk7vvthaty"

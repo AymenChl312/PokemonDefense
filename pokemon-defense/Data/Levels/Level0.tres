@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1_fydxn")
 level_name = "Niveau 0"
-possible_enemies = Array[int]([100])
+level_start_time = 20.0
+spawn_interval = 5.0
+possible_enemies = Array[int]([100, 102])
 metadata/_custom_type_script = "uid://w7fukjjjn83m"
