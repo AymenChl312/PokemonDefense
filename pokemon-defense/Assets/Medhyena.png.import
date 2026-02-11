@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4216u3w7v7wh"
-path="res://.godot/imported/Bubble.png-0a40f574d35928a007d42598028121f3.ctex"
+uid="uid://y1p53kty7x4v"
+path="res://.godot/imported/Medhyena.png-350ab9a125453d4ca40985ff977f31c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bubble.png"
-dest_files=["res://.godot/imported/Bubble.png-0a40f574d35928a007d42598028121f3.ctex"]
+source_file="res://Assets/Medhyena.png"
+dest_files=["res://.godot/imported/Medhyena.png-350ab9a125453d4ca40985ff977f31c5.ctex"]
 
 [params]
 

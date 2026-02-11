@@ -1,14 +1,28 @@
 [gd_scene format=3 uid="uid://c821uhrofmk4r"]
 
-[ext_resource type="Script" uid="uid://cyx4nk4fho3ln" path="res://Scripts/carapuce.gd" id="1_16d14"]
-[ext_resource type="Texture2D" uid="uid://grxyxn0fdxng" path="res://Assets/Carapuce.png" id="2_e3e7x"]
+[ext_resource type="Script" uid="uid://cyx4nk4fho3ln" path="res://Scripts/Carapuce.gd" id="1_6ugo8"]
+[ext_resource type="Texture2D" uid="uid://grxyxn0fdxng" path="res://Assets/Carapuce.png" id="2_4uqff"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ugo8"]
+size = Vector2(38, 39)
 
 [node name="Carapuce" type="StaticBody2D" unique_id=41806095]
-script = ExtResource("1_16d14")
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_6ugo8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=657085540]
-texture = ExtResource("2_e3e7x")
+texture = ExtResource("2_4uqff")
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=398652013]
 wait_time = 1.5
-autostart = true
+one_shot = true
+
+[node name="LineDetector" type="RayCast2D" parent="." unique_id=776151156]
+target_position = Vector2(1000, 0)
+collision_mask = 4
+collide_with_areas = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864098391]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6ugo8")

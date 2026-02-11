@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4216u3w7v7wh"
-path="res://.godot/imported/Bubble.png-0a40f574d35928a007d42598028121f3.ctex"
+uid="uid://bvxciplwva6m4"
+path="res://.godot/imported/Tile_HoverHighlitgh.png-f664190728d33e2082add01373697676.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bubble.png"
-dest_files=["res://.godot/imported/Bubble.png-0a40f574d35928a007d42598028121f3.ctex"]
+source_file="res://Assets/Tile_HoverHighlitgh.png"
+dest_files=["res://.godot/imported/Tile_HoverHighlitgh.png-f664190728d33e2082add01373697676.ctex"]
 
 [params]
 
