@@ -9,18 +9,18 @@
 script = ExtResource("1_h25r7")
 pkmn_id = 100
 sprite = ExtResource("2_25eft")
-health = 80
+health = 200
 speed = 30.0
-attack_damage = 20.0
+attack_damage = 40.0
 metadata/_custom_type_script = "uid://bqitnlnj80oku"
 
 [sub_resource type="Resource" id="Resource_1t5kf"]
 script = ExtResource("1_h25r7")
 pkmn_id = 102
 sprite = ExtResource("3_2rls1")
-health = 40
-speed = 70.0
-attack_damage = 10.0
+health = 80
+speed = 80.0
+attack_damage = 20.0
 metadata/_custom_type_script = "uid://bqitnlnj80oku"
 
 [resource]

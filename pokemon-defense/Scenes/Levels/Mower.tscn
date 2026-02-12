@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bwtvyjlfvc0gj"]
+
+[ext_resource type="Script" uid="uid://d3frvjegl6o1t" path="res://Scripts/Levels/Mower.gd" id="1_g6rqc"]
+[ext_resource type="Texture2D" uid="uid://bxfr5hmgqpfwk" path="res://Assets/PokemonsAllies/MotismaTondeuse.png" id="1_me5dd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6rqc"]
+size = Vector2(71, 62)
+
+[node name="Mower" type="Area2D" unique_id=1968038472 groups=["Mowers"]]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_g6rqc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1908585546]
+texture = ExtResource("1_me5dd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=842257152]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_g6rqc")

@@ -5,6 +5,9 @@ var stats: EnemyData
 var current_health: int
 var can_move = true
 
+
+#--Set Up Enemies--
+
 func _ready():
 	add_to_group("Enemies")
 	var library = preload("res://Data/Pokemons/EnemyLibrary.tres")
@@ -16,6 +19,9 @@ func setup_enemy():
 	$Sprite2D.texture = stats.sprite
 	current_health = stats.health
 
+#--Attack--
+
+#Attack pokemon allies
 func _process(delta):
 	if $AttackRay.is_colliding():
 		var target = $AttackRay.get_collider()
@@ -28,12 +34,17 @@ func _process(delta):
 	if can_move:
 		position.x -= stats.speed * delta
 
+
+#---Damage--
+
+#Damage received
 func receive_damage(amount):
 	current_health -= amount
 	flash_hit()
 	if current_health <= 0:
 		queue_free()
-		
+
+#Animation damage
 func flash_hit():
 	var tween = create_tween()
 	$Sprite2D.modulate = Color(1, 0, 0)

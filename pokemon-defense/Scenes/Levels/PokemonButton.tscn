@@ -1,6 +1,73 @@
 [gd_scene format=3 uid="uid://c6bogtdthbj7c"]
 
+[ext_resource type="Texture2D" uid="uid://bcbgxjumsjo53" path="res://Assets/UI/Button.png" id="1_6j5at"]
 [ext_resource type="Script" uid="uid://crttbyoufa6ud" path="res://Scripts/Levels/PokemonButton.gd" id="1_w6fiq"]
+[ext_resource type="Texture2D" uid="uid://ckfley1vs0rve" path="res://Assets/PokemonIcons/SquirtleIcon.png" id="3_gm5k7"]
+[ext_resource type="Texture2D" uid="uid://7j6vln7cr3ks" path="res://Assets/UI/Glow.png" id="3_i82su"]
 
-[node name="PokemonButton" type="Button" unique_id=359146361]
+[node name="PokemonItem" type="HBoxContainer" unique_id=344082328]
+custom_minimum_size = Vector2(0, 160)
+offset_right = 256.0
+offset_bottom = 160.0
 script = ExtResource("1_w6fiq")
+
+[node name="InfoButton" type="Button" parent="." unique_id=63769113]
+layout_mode = 2
+text = "i"
+
+[node name="MainButton" type="TextureButton" parent="." unique_id=1656187562]
+layout_mode = 2
+texture_normal = ExtResource("1_6j5at")
+
+[node name="Glow" type="TextureRect" parent="MainButton" unique_id=1784345817]
+visible = false
+self_modulate = Color(1, 0.9529412, 0.7176471, 0.6039216)
+layout_mode = 0
+offset_left = 6.000001
+offset_top = 23.0
+offset_right = 134.0
+offset_bottom = 151.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_i82su")
+stretch_mode = 2
+
+[node name="Icon" type="TextureRect" parent="MainButton" unique_id=114414047]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 37.0
+offset_right = 57.0
+offset_bottom = 77.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_gm5k7")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="CostLabel" type="Label" parent="MainButton" unique_id=253806493]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 65.0
+offset_right = 242.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "100 PP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescPanel" type="PanelContainer" parent="." unique_id=1594198935]
+visible = false
+custom_minimum_size = Vector2(256, 160)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="DescLabel" type="Label" parent="DescPanel" unique_id=29764425]
+custom_minimum_size = Vector2(256, 160)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Pokemon"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="mouse_entered" from="MainButton" to="." method="_on_main_button_mouse_entered"]
+[connection signal="mouse_exited" from="MainButton" to="." method="_on_main_button_mouse_exited"]

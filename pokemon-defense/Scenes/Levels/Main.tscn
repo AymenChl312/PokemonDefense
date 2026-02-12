@@ -4,15 +4,19 @@
 [ext_resource type="Resource" uid="uid://xv6m8sdhtfs6" path="res://Data/Levels/Level0.tres" id="2_d31q8"]
 [ext_resource type="Texture2D" uid="uid://c7e0yyl1r0jjf" path="res://Assets/Tiles/Tile_Grass.png" id="3_dmpbk"]
 [ext_resource type="Texture2D" uid="uid://bvxciplwva6m4" path="res://Assets/Tiles/Tile_HoverHighlitgh.png" id="4_r66ge"]
+[ext_resource type="Texture2D" uid="uid://bfuvijslc1h5v" path="res://Assets/UI/Pokeball.png" id="5_d31q8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("3_dmpbk")
-texture_region_size = Vector2i(64, 64)
+texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8gbba"]
-tile_size = Vector2i(64, 64)
+tile_size = Vector2i(128, 128)
 sources/1 = SubResource("TileSetAtlasSource_bo1nx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d31q8"]
+size = Vector2(268, 1103)
 
 [node name="Main" type="Node2D" unique_id=700731195]
 script = ExtResource("1_07780")
@@ -24,22 +28,61 @@ offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Grid" type="TileMapLayer" parent="." unique_id=1488914521]
-tile_map_data = PackedByteArray("AAAGAAYAAQAAAAAAAAAFAAcAAQAAAAAAAAAFAAYAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAQAAQAAAAAAAAANAAcAAQAAAAAAAAANAAYAAQAAAAAAAAANAAUAAQAAAAAAAAANAAQAAQAAAAAAAAAMAAQAAQAAAAAAAAALAAQAAQAAAAAAAAAKAAQAAQAAAAAAAAAJAAQAAQAAAAAAAAAIAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAJAAUAAQAAAAAAAAAKAAUAAQAAAAAAAAALAAUAAQAAAAAAAAALAAYAAQAAAAAAAAAMAAYAAQAAAAAAAAAMAAcAAQAAAAAAAAALAAcAAQAAAAAAAAAKAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAIAAcAAQAAAAAAAAAHAAcAAQAAAAAAAAAHAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAAGAAcAAQAAAAAAAAAMAAUAAQAAAAAAAAAFAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAHAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAALAAMAAQAAAAAAAAAMAAMAAQAAAAAAAAANAAMAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAMAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAUAAQAAAAAAAAAJAAYAAQAAAAAAAAAKAAMAAQAAAAAAAAAKAAQAAQAAAAAAAAAKAAUAAQAAAAAAAAAKAAYAAQAAAAAAAAALAAMAAQAAAAAAAAALAAQAAQAAAAAAAAALAAUAAQAAAAAAAAALAAYAAQAAAAAAAAAMAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAAMAAUAAQAAAAAAAAAMAAYAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAUAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_8gbba")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=793626523]
 
-[node name="ButtonContainer" type="HBoxContainer" parent="UI" unique_id=1064654930]
-offset_left = 327.0
-offset_top = 16.0
-offset_right = 1132.0
-offset_bottom = 107.0
+[node name="ButtonContainer" type="VBoxContainer" parent="UI" unique_id=1425952319]
+offset_left = 26.0
+offset_top = 156.0
+offset_right = 491.0
+offset_bottom = 973.0
 
 [node name="EnergyLabel" type="Label" parent="UI" unique_id=305044857]
 offset_right = 47.0
 offset_bottom = 23.0
 scale = Vector2(5, 5)
 text = "PP:"
+
+[node name="PokemonPreview" type="Sprite2D" parent="UI" unique_id=124604621]
+visible = false
+modulate = Color(1, 1, 1, 0.5411765)
+
+[node name="GameOverScreen" type="Control" parent="UI" unique_id=2085280942]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOverScreen" unique_id=2143370592]
+layout_mode = 0
+offset_left = -49.0
+offset_top = -20.0
+offset_right = 1946.0
+offset_bottom = 1096.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Label" type="Label" parent="UI/GameOverScreen" unique_id=864734914]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 291.0
+offset_right = 1482.0
+offset_bottom = 619.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 240
+text = "GAME OVER"
+
+[node name="RestartButton" type="Button" parent="UI/GameOverScreen" unique_id=921014512]
+layout_mode = 0
+offset_left = 739.0
+offset_top = 636.0
+offset_right = 1302.0
+offset_bottom = 849.0
+theme_override_font_sizes/font_size = 150
+text = "Restart"
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1538968114]
 
@@ -50,10 +93,24 @@ visible = false
 modulate = Color(1, 1, 1, 0.47058824)
 texture = ExtResource("4_r66ge")
 
-[node name="PokemonPreview" type="Sprite2D" parent="." unique_id=124604621]
-visible = false
-modulate = Color(1, 1, 1, 0.5411765)
-
 [node name="SpawnTimer" type="Timer" parent="." unique_id=2049169520]
 wait_time = 3.0
 autostart = true
+
+[node name="PokeballButton" type="TextureButton" parent="." unique_id=1664505037]
+offset_left = 510.0
+offset_top = 9.0
+offset_right = 638.0
+offset_bottom = 137.0
+texture_normal = ExtResource("5_d31q8")
+stretch_mode = 0
+
+[node name="LosingZone" type="Area2D" parent="." unique_id=1333608749]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LosingZone" unique_id=999971607]
+position = Vector2(124, 541.5)
+shape = SubResource("RectangleShape2D_d31q8")
+
+[connection signal="button_down" from="UI/GameOverScreen/RestartButton" to="." method="_on_restart_button_down"]
+[connection signal="button_down" from="PokeballButton" to="." method="_on_pokeball_selected"]

@@ -7,7 +7,9 @@ enum Type { ATTACK, PRODUCE, DEFEND }
 @export var pkmn_type: Type = Type.ATTACK
 @export var pkmn_name: PkmnID.Name
 @export var sprite: Texture2D
+@export var icon_sprite: Texture2D
 @export var pkmn_name_string: String = ""
+@export var pkmn_description: String = ""
 
 @export_group("Stats")
 @export var health: int = 100
@@ -16,6 +18,6 @@ enum Type { ATTACK, PRODUCE, DEFEND }
 @export var range_tiles: int = 9 
 @export var cost: int = 50
 
-@export_group("Visuals")
+@export_group("Projectiles")
 @export var proj_sprite: Texture2D
 @export var proj_speed: float = 400.0

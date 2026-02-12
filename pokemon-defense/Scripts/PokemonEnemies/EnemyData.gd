@@ -4,6 +4,7 @@ class_name EnemyData
 @export_group("Identity")
 @export var pkmn_id: PkmnID.Name
 @export var sprite: Texture2D
+@export var is_boss: bool = false
 
 @export_group("Stats")
 @export var health: int = 50

@@ -1,18 +1,24 @@
 [gd_resource type="Resource" script_class="PokemonLibrary" format=3 uid="uid://dvucxvjkc7u10"]
 
 [ext_resource type="Script" uid="uid://ddpdvw18frqac" path="res://Scripts/PokemonAllies/PkmnData.gd" id="1_unobo"]
+[ext_resource type="Texture2D" uid="uid://ckfley1vs0rve" path="res://Assets/PokemonIcons/SquirtleIcon.png" id="2_h0n8x"]
 [ext_resource type="Texture2D" uid="uid://4216u3w7v7wh" path="res://Assets/Projectiles/Bubble.png" id="2_pnkj7"]
 [ext_resource type="Texture2D" uid="uid://grxyxn0fdxng" path="res://Assets/PokemonsAllies/Carapuce.png" id="3_ters5"]
 [ext_resource type="Texture2D" uid="uid://c3wffcwqeu3d7" path="res://Assets/Projectiles/energy.png" id="4_pnkj7"]
 [ext_resource type="Texture2D" uid="uid://bxqg0jjqcont2" path="res://Assets/PokemonsAllies/Tournegrain.png" id="5_ters5"]
+[ext_resource type="Texture2D" uid="uid://c61ypqtxas6cg" path="res://Assets/PokemonIcons/TournegrainIcon.png" id="5_uc8b1"]
 [ext_resource type="Script" uid="uid://i5xk7vvthaty" path="res://Scripts/PokemonAllies/PkmnLibrary.gd" id="5_wkx57"]
 [ext_resource type="Texture2D" uid="uid://bmfpd46sgbj4k" path="res://Assets/PokemonsAllies/Racaillou.png" id="6_ters5"]
+[ext_resource type="Texture2D" uid="uid://d0ukxysv363fk" path="res://Assets/PokemonIcons/GeodudeIcon.png" id="8_vdaoe"]
 
 [sub_resource type="Resource" id="Resource_g4acg"]
 script = ExtResource("1_unobo")
 pkmn_name = 1
 sprite = ExtResource("3_ters5")
+icon_sprite = ExtResource("2_h0n8x")
 pkmn_name_string = "Carapuce"
+pkmn_description = "Ses bulles d'eau éclate au contact de l'ennemi vous protegeant de tout danger."
+range_tiles = 10
 cost = 100
 proj_sprite = ExtResource("2_pnkj7")
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
@@ -22,9 +28,11 @@ script = ExtResource("1_unobo")
 pkmn_type = 1
 pkmn_name = 4
 sprite = ExtResource("5_ters5")
+icon_sprite = ExtResource("5_uc8b1")
 pkmn_name_string = "Tournegrin"
+pkmn_description = "Produit assez de PP pour créer une armée de petits pokémons."
 primary_value = 25.0
-action_rate = 5.0
+action_rate = 10.0
 proj_sprite = ExtResource("4_pnkj7")
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
@@ -33,10 +41,11 @@ script = ExtResource("1_unobo")
 pkmn_type = 2
 pkmn_name = 6
 sprite = ExtResource("6_ters5")
+icon_sprite = ExtResource("8_vdaoe")
 pkmn_name_string = "Racaillou"
+pkmn_description = "Défendra ses camarades contre tout les ennemis en restant solide comme un roc."
 health = 250
 range_tiles = 0
-cost = 200
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
 [resource]
