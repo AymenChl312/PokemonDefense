@@ -10,3 +10,4 @@ class_name EnemyData
 @export var health: int = 50
 @export var speed: float = 50.0
 @export var attack_damage: float = 5.0
+@export var attack_speed: float = 2.0

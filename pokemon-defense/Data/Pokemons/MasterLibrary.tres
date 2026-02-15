@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://i5xk7vvthaty" path="res://Scripts/PokemonAllies/PkmnLibrary.gd" id="5_wkx57"]
 [ext_resource type="Texture2D" uid="uid://bmfpd46sgbj4k" path="res://Assets/PokemonsAllies/Racaillou.png" id="6_ters5"]
 [ext_resource type="Texture2D" uid="uid://d0ukxysv363fk" path="res://Assets/PokemonIcons/GeodudeIcon.png" id="8_vdaoe"]
+[ext_resource type="Texture2D" uid="uid://cmwdsq40lp7ok" path="res://Assets/PokemonsAllies/Carabaffe.png" id="11_3b4tl"]
+[ext_resource type="Texture2D" uid="uid://t88c6lpefux5" path="res://Assets/PokemonsAllies/Heliatronc.png" id="11_xyt52"]
 
 [sub_resource type="Resource" id="Resource_g4acg"]
 script = ExtResource("1_unobo")
@@ -18,9 +20,12 @@ sprite = ExtResource("3_ters5")
 icon_sprite = ExtResource("2_h0n8x")
 pkmn_name_string = "Carapuce"
 pkmn_description = "Ses bulles d'eau éclate au contact de l'ennemi vous protegeant de tout danger."
+evolution_id = 2
+action_rate = 1.0
 range_tiles = 10
 cost = 100
 proj_sprite = ExtResource("2_pnkj7")
+proj_speed = 500.0
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
 [sub_resource type="Resource" id="Resource_pnkj7"]
@@ -31,8 +36,10 @@ sprite = ExtResource("5_ters5")
 icon_sprite = ExtResource("5_uc8b1")
 pkmn_name_string = "Tournegrin"
 pkmn_description = "Produit assez de PP pour créer une armée de petits pokémons."
+evolution_id = 5
 primary_value = 25.0
 action_rate = 10.0
+cooldown = 2.0
 proj_sprite = ExtResource("4_pnkj7")
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
@@ -46,13 +53,45 @@ pkmn_name_string = "Racaillou"
 pkmn_description = "Défendra ses camarades contre tout les ennemis en restant solide comme un roc."
 health = 250
 range_tiles = 0
+cooldown = 10.0
+metadata/_custom_type_script = "uid://ddpdvw18frqac"
+
+[sub_resource type="Resource" id="Resource_3n88s"]
+script = ExtResource("1_unobo")
+pkmn_type = 1
+pkmn_name = 5
+sprite = ExtResource("11_xyt52")
+pkmn_name_string = "Héliatronc"
+pkmn_description = "Produit encore plus de soleil que Tournegrain."
+is_buyable = false
+health = 150
+primary_value = 50.0
+action_rate = 10.0
+proj_sprite = ExtResource("4_pnkj7")
+metadata/_custom_type_script = "uid://ddpdvw18frqac"
+
+[sub_resource type="Resource" id="Resource_xyt52"]
+script = ExtResource("1_unobo")
+pkmn_name = 2
+sprite = ExtResource("11_3b4tl")
+pkmn_name_string = "Carabaffe"
+pkmn_description = "Ses bulles sont encore plus puissantes. Mais sa carapace lourde le rend plus lent."
+evolution_id = 3
+is_buyable = false
+health = 200
+primary_value = 40.0
+action_rate = 1.0
+proj_sprite = ExtResource("2_pnkj7")
+proj_speed = 500.0
 metadata/_custom_type_script = "uid://ddpdvw18frqac"
 
 [resource]
 script = ExtResource("5_wkx57")
 database = Dictionary[int, ExtResource("1_unobo")]({
 1: SubResource("Resource_g4acg"),
+2: SubResource("Resource_xyt52"),
 4: SubResource("Resource_pnkj7"),
+5: SubResource("Resource_3n88s"),
 6: SubResource("Resource_ters5")
 })
 metadata/_custom_type_script = "uid://i5xk7vvthaty"

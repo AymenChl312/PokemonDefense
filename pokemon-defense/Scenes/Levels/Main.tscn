@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c7e0yyl1r0jjf" path="res://Assets/Tiles/Tile_Grass.png" id="3_dmpbk"]
 [ext_resource type="Texture2D" uid="uid://bvxciplwva6m4" path="res://Assets/Tiles/Tile_HoverHighlitgh.png" id="4_r66ge"]
 [ext_resource type="Texture2D" uid="uid://bfuvijslc1h5v" path="res://Assets/UI/Pokeball.png" id="5_d31q8"]
+[ext_resource type="Texture2D" uid="uid://c2o03n2md8i22" path="res://Assets/UI/bonbon.jpg" id="6_dmpbk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("3_dmpbk")
@@ -93,6 +94,12 @@ visible = false
 modulate = Color(1, 1, 1, 0.47058824)
 texture = ExtResource("4_r66ge")
 
+[node name="MergeHighlight" type="Sprite2D" parent="." unique_id=376994598]
+visible = false
+modulate = Color(1, 1, 1, 0.47058824)
+self_modulate = Color(0, 0, 0.4509804, 0.5882353)
+texture = ExtResource("4_r66ge")
+
 [node name="SpawnTimer" type="Timer" parent="." unique_id=2049169520]
 wait_time = 3.0
 autostart = true
@@ -105,6 +112,13 @@ offset_bottom = 137.0
 texture_normal = ExtResource("5_d31q8")
 stretch_mode = 0
 
+[node name="CandyButton" type="TextureButton" parent="." unique_id=2026579820]
+offset_left = 662.0
+offset_right = 887.0
+offset_bottom = 225.0
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("6_dmpbk")
+
 [node name="LosingZone" type="Area2D" parent="." unique_id=1333608749]
 collision_mask = 4
 
@@ -114,3 +128,4 @@ shape = SubResource("RectangleShape2D_d31q8")
 
 [connection signal="button_down" from="UI/GameOverScreen/RestartButton" to="." method="_on_restart_button_down"]
 [connection signal="button_down" from="PokeballButton" to="." method="_on_pokeball_selected"]
+[connection signal="button_down" from="CandyButton" to="." method="_on_candy_button_down"]

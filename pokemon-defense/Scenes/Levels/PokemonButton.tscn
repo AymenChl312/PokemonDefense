@@ -54,6 +54,18 @@ text = "100 PP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CooldownOverlay" type="TextureProgressBar" parent="MainButton" unique_id=1079290319]
+visible = false
+layout_mode = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 257.0
+offset_bottom = 159.0
+mouse_filter = 2
+fill_mode = 2
+texture_progress = ExtResource("1_6j5at")
+tint_progress = Color(0.16, 0.16, 0.16, 0.5882353)
+
 [node name="DescPanel" type="PanelContainer" parent="." unique_id=1594198935]
 visible = false
 custom_minimum_size = Vector2(256, 160)

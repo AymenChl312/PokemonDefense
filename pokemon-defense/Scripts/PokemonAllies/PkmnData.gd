@@ -10,6 +10,8 @@ enum Type { ATTACK, PRODUCE, DEFEND }
 @export var icon_sprite: Texture2D
 @export var pkmn_name_string: String = ""
 @export var pkmn_description: String = ""
+@export var evolution_id: PkmnID.Name = PkmnID.Name.NONE
+@export var is_buyable: bool = true
 
 @export_group("Stats")
 @export var health: int = 100
@@ -17,6 +19,7 @@ enum Type { ATTACK, PRODUCE, DEFEND }
 @export var action_rate: float = 1.5   
 @export var range_tiles: int = 9 
 @export var cost: int = 50
+@export var cooldown: float = 5.0
 
 @export_group("Projectiles")
 @export var proj_sprite: Texture2D

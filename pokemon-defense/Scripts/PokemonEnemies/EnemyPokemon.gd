@@ -4,6 +4,7 @@ extends Area2D
 var stats: EnemyData
 var current_health: int
 var can_move = true
+var attack_timer = 0.0
 
 
 #--Set Up Enemies--
@@ -27,9 +28,18 @@ func _process(delta):
 		var target = $AttackRay.get_collider()
 		if target and target.has_method("take_damage"):
 			can_move = false
-			target.take_damage(stats.attack_damage * delta) 
+			attack_timer += delta
+			var attack_cooldown = stats.attack_speed
+			
+			if attack_timer >= attack_cooldown:
+				target.take_damage(stats.attack_damage)
+				attack_timer = 0.0 
 	else:
 		can_move = true
+		attack_timer = stats.attack_speed
+
+	if can_move:
+		position.x -= stats.speed * delta
 
 	if can_move:
 		position.x -= stats.speed * delta

@@ -19,6 +19,10 @@ var energy = 100
 var occupied_cells = {} 
 var selected_id = PkmnID.Name.NONE
 const POKEBALL_ID = -2
+const MAX_TARGETABLE_X = 1100
+var button_dictionary = {}
+const CANDY_ID = -3
+var first_merge_candidate_pos = Vector2i(-1, -1)
 
 #-- Set Up --
 
@@ -75,8 +79,23 @@ func _process(_delta):
 #Can the pokemon be placed ?
 func is_valid_cell(map_pos):
 	var source_id = $Grid.get_cell_source_id(map_pos)
-	var is_free = not occupied_cells.has(map_pos)
-	return source_id != -1 and is_free
+	if source_id == -1: return false
+	
+	if selected_id == CANDY_ID:
+		return occupied_cells.has(map_pos)
+	
+	if selected_id == POKEBALL_ID:
+		return true
+	
+	if not occupied_cells.has(map_pos):
+		return true
+	
+	if selected_id > 0:
+		var existing = occupied_cells[map_pos]
+		var data = master_library.database[selected_id]
+		return existing.my_id == selected_id and data.evolution_id != PkmnID.Name.NONE
+		
+	return false
 
 #See mouse on tile and center it
 func _input(event):
@@ -101,6 +120,44 @@ func place_pokemon(mouse_pos):
 	var local_pos = $Grid.to_local(mouse_pos)
 	var map_pos = $Grid.local_to_map(local_pos)
 	
+	if selected_id == CANDY_ID:
+		if occupied_cells.has(map_pos):
+			if first_merge_candidate_pos == Vector2i(-1, -1):
+				first_merge_candidate_pos = map_pos
+				
+				var tile_center_local = $Grid.map_to_local(map_pos)
+				$MergeHighlight.global_position = $Grid.to_global(tile_center_local)
+				$MergeHighlight.visible = true
+				
+				cancel_selection()
+				return
+			
+			else:
+				var pkmn1 = occupied_cells[first_merge_candidate_pos]
+				var pkmn2 = occupied_cells[map_pos]
+				
+				cancel_selection() 
+				
+				if pkmn1 != pkmn2 and pkmn1.my_id == pkmn2.my_id:
+					var evo_id = master_library.database[pkmn1.my_id].evolution_id
+					if evo_id != PkmnID.Name.NONE:
+						var target_pos = first_merge_candidate_pos
+						
+						$MergeHighlight.visible = false
+						
+						occupied_cells.erase(map_pos)
+						pkmn2.queue_free()
+						
+						await pkmn1.play_evolution_glow()
+						occupied_cells.erase(target_pos)
+						pkmn1.queue_free()
+						
+						spawn_evolved_pokemon(target_pos, evo_id)
+				
+				$MergeHighlight.visible = false
+				first_merge_candidate_pos = Vector2i(-1, -1)
+		return
+		
 	if selected_id == POKEBALL_ID:
 		if occupied_cells.has(map_pos):
 			var pokemon_to_remove = occupied_cells[map_pos]
@@ -108,11 +165,29 @@ func place_pokemon(mouse_pos):
 			if pokemon_to_remove.has_method("is_being_captured") and pokemon_to_remove.is_being_captured():
 				return
 
-			
 			pokemon_to_remove.capture_animation()
 			cancel_selection()
 		return
 
+	if occupied_cells.has(map_pos):
+		var existing_pkmn = occupied_cells[map_pos]
+		var evo_id = master_library.database[selected_id].evolution_id
+		
+		if existing_pkmn.my_id == selected_id and evo_id != PkmnID.Name.NONE:
+			var pkmn_to_evolve = existing_pkmn
+			cancel_selection()
+			
+			await pkmn_to_evolve.play_evolution_glow()
+			
+			occupied_cells.erase(map_pos)
+			pkmn_to_evolve.queue_free()
+			
+			spawn_evolved_pokemon(map_pos, evo_id)
+			return
+		else:
+			return
+
+	# Placement classique
 	if is_valid_cell(map_pos):
 		var new_pokemon = pokemon_base_scene.instantiate()
 		new_pokemon.my_id = selected_id
@@ -125,11 +200,33 @@ func place_pokemon(mouse_pos):
 		new_pokemon.tree_exiting.connect(func(): if occupied_cells.get(map_pos) == new_pokemon: occupied_cells.erase(map_pos))
 		
 		energy -= master_library.database[selected_id].cost
+		
+		if button_dictionary.has(selected_id):
+			button_dictionary[selected_id].start_cooldown()
+			
 		cancel_selection()
 		update_ui()
 
+#Spawn evolved pokemon
+func spawn_evolved_pokemon(map_pos, evo_id):
+	var evolved_pkmn = pokemon_base_scene.instantiate()
+	evolved_pkmn.my_id = evo_id
+	
+	var tile_center_local = $Grid.map_to_local(map_pos)
+	evolved_pkmn.global_position = $Grid.to_global(tile_center_local)
+	
+	add_child(evolved_pkmn)
+	occupied_cells[map_pos] = evolved_pkmn
+	evolved_pkmn.tree_exiting.connect(func(): if occupied_cells.get(map_pos) == evolved_pkmn: occupied_cells.erase(map_pos))
+
 #Cancel Pokemon Selection
 func cancel_selection():
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		if first_merge_candidate_pos != Vector2i(-1, -1):
+			if occupied_cells.has(first_merge_candidate_pos):
+				occupied_cells[first_merge_candidate_pos].modulate = Color.WHITE
+			first_merge_candidate_pos = Vector2i(-1, -1)
+	
 	selected_id = PkmnID.Name.NONE
 	$UI/PokemonPreview.visible = false
 
@@ -218,14 +315,20 @@ func spawn_natural_energy():
 #Buttons Pokemon
 func generate_buttons():
 	for id in master_library.database:
-		var item = pkmn_button_scene.instantiate()
 		var data = master_library.database[id]
+		
+		if not data.is_buyable:
+			continue
+			
+		var item = pkmn_button_scene.instantiate()
 		
 		item.setup(data)
 		
 		item.get_node("MainButton").button_down.connect(func(): _on_pokemon_selected(id))
 		
 		$UI/ButtonContainer.add_child(item)
+		
+		button_dictionary[id] = item
 
 #Hover button
 func _on_button_hovered(text, p_visible):
@@ -249,6 +352,12 @@ func _on_pokemon_selected(id):
 func _on_pokeball_selected():
 	selected_id = POKEBALL_ID
 	$UI/PokemonPreview.texture = preload("res://Assets/UI/Pokeball.png") 
+	$UI/PokemonPreview.visible = true
+
+#CandyButton
+func _on_candy_button_down():
+	selected_id = CANDY_ID
+	$UI/PokemonPreview.texture = preload("res://Assets/UI/bonbon.jpg")
 	$UI/PokemonPreview.visible = true
 
 #Restart Game Over button
