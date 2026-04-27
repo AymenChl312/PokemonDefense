@@ -175,6 +175,12 @@ func place_pokemon(mouse_pos):
 		
 		if existing_pkmn.my_id == selected_id and evo_id != PkmnID.Name.NONE:
 			var pkmn_to_evolve = existing_pkmn
+			
+			energy -= master_library.database[selected_id].cost
+			if button_dictionary.has(selected_id):
+				button_dictionary[selected_id].start_cooldown()
+			update_ui()
+			
 			cancel_selection()
 			
 			await pkmn_to_evolve.play_evolution_glow()
@@ -186,8 +192,6 @@ func place_pokemon(mouse_pos):
 			return
 		else:
 			return
-
-	# Placement classique
 	if is_valid_cell(map_pos):
 		var new_pokemon = pokemon_base_scene.instantiate()
 		new_pokemon.my_id = selected_id
@@ -343,6 +347,9 @@ func check_buttons_affordability():
 
 #Pokemon hover selection
 func _on_pokemon_selected(id):
+	var btn = button_dictionary.get(id)
+	if btn and btn.get("is_on_cooldown") == true:
+		return 
 	if energy >= master_library.database[id].cost:
 		selected_id = id
 		$UI/PokemonPreview.texture = master_library.database[id].sprite

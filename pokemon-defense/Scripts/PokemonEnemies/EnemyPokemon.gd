@@ -5,7 +5,8 @@ var stats: EnemyData
 var current_health: int
 var can_move = true
 var attack_timer = 0.0
-
+var current_speed_multiplier = 1.0
+var slow_timer = 0.0
 
 #--Set Up Enemies--
 
@@ -24,28 +25,41 @@ func setup_enemy():
 
 #Attack pokemon allies
 func _process(delta):
+	
+	# Slow down 
+	if slow_timer > 0:
+		slow_timer -= delta
+		if slow_timer <= 0:
+			current_speed_multiplier = 1.0
+			$Sprite2D.modulate = Color(1, 1, 1)
+
+	# Attack
 	if $AttackRay.is_colliding():
 		var target = $AttackRay.get_collider()
-		if target and target.has_method("take_damage"):
+		if target and target.has_method("receive_damage"):
 			can_move = false
 			attack_timer += delta
-			var attack_cooldown = stats.attack_speed
-			
-			if attack_timer >= attack_cooldown:
-				target.take_damage(stats.attack_damage)
+			if attack_timer >= stats.attack_speed:
+				target.receive_damage(stats.attack_damage)
 				attack_timer = 0.0 
 	else:
 		can_move = true
 		attack_timer = stats.attack_speed
 
+	# Movement
 	if can_move:
-		position.x -= stats.speed * delta
+		position.x -= (stats.speed * current_speed_multiplier) * delta
 
-	if can_move:
-		position.x -= stats.speed * delta
+#---Damage & Effects--
 
-
-#---Damage--
+#Slow effect from ice attacks
+func apply_slow(reduction_percent: float, duration: float):
+	if slow_timer <= 0:
+		current_speed_multiplier = 1.0 - (reduction_percent / 100.0)
+	slow_timer = duration
+	
+	if $Sprite2D.modulate != Color(1, 0, 0):
+		$Sprite2D.modulate = Color(0.3, 0.5, 1.0)
 
 #Damage received
 func receive_damage(amount):
@@ -58,4 +72,5 @@ func receive_damage(amount):
 func flash_hit():
 	var tween = create_tween()
 	$Sprite2D.modulate = Color(1, 0, 0)
-	tween.tween_property($Sprite2D, "modulate", Color(1, 1, 1), 0.2)
+	var back_color = Color(0.3, 0.5, 1.0) if slow_timer > 0 else Color(1, 1, 1)
+	tween.tween_property($Sprite2D, "modulate", back_color, 0.1)
